@@ -26,6 +26,7 @@ const ItemStore = () => {
         const { data: { key } } = await axios.get("https://server-backend-p9xn.onrender.com/api/getkey");
 
         const { data: { order } } = await axios.post("https://server-backend-p9xn.onrender.com/api/checkout", { amount, itemName });
+        // console.log("item", itemName)
 
         const options = {
             key,
@@ -50,7 +51,10 @@ const ItemStore = () => {
         };
         const razor = new window.Razorpay(options);
         razor.open();
+
+
     };
+
 
     // Responsive margin and direction
     const stackDirection = useBreakpointValue({ base: "row", md: "row" });
