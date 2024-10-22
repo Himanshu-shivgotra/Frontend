@@ -23,9 +23,9 @@ const ItemStore = () => {
     }, []);
 
     const checkoutHandler = async (amount, itemName) => {
-        const { data: { key } } = await axios.get("http://localhost:1000/api/getkey");
+        const { data: { key } } = await axios.get("https://server-backend-p9xn.onrender.com/api/getkey");
 
-        const { data: { order } } = await axios.post("http://localhost:1000/api/checkout", { amount, itemName });
+        const { data: { order } } = await axios.post("https://server-backend-p9xn.onrender.com/api/checkout", { amount, itemName });
 
         const options = {
             key,
@@ -35,7 +35,7 @@ const ItemStore = () => {
             description: "Learning Payment Gateway",
             image: "https://media.licdn.com/media/AAYQAQSOAAgAAQAAAAAAAB-zrMZEDXI2T62PSuT6kpB6qg.png",
             order_id: order.id,
-            callback_url: "http://localhost:1000/api/paymentverification",
+            callback_url: "https://server-backend-p9xn.onrender.com/api/paymentverification",
             prefill: {
                 name: "Himanshu Shivgotra",
                 email: "himanshushivgotra@example.com",

@@ -19,7 +19,7 @@ const OrderTracking = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const { data } = await axios.get("http://localhost:1000/api/orders");
+                const { data } = await axios.get("https://server-backend-p9xn.onrender.com/api/orders");
                 if (data.success) {
                     setOrders(data.orders);
                 }
@@ -34,7 +34,7 @@ const OrderTracking = () => {
     const trackOrder = async () => {
         try {
             const { data } = await axios.get(
-                `http://localhost:1000/api/orders/track/${orderId}`
+                `https://server-backend-p9xn.onrender.com/api/orders/track/${orderId}`
             );
             setOrderDetails(data.order);
             setError("");
@@ -52,7 +52,7 @@ const OrderTracking = () => {
             const nextStatus = orderStatuses[currentStatusIndex + 1];
             try {
                 const { data } = await axios.put(
-                    `http://localhost:1000/api/orders/update/${selectedOrderId}`,
+                    `https://server-backend-p9xn.onrender.com/api/orders/update/${selectedOrderId}`,
                     { status: nextStatus }
                 );
                 setOrderDetails(data.order);
@@ -71,7 +71,7 @@ const OrderTracking = () => {
             const fetchSelectedOrder = async () => {
                 try {
                     const { data } = await axios.get(
-                        `http://localhost:1000/api/orders/track/${selectedId}`
+                        `https://server-backend-p9xn.onrender.com/api/orders/track/${selectedId}`
                     );
                     setOrderDetails(data.order);
                 } catch (err) {
