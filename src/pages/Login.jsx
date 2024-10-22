@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar buttonTwoPath={'/signup'} buttonTwoValue={"SignUp"} />
 
       <div className="bg-white font-[sans-serif] min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full border p-8 rounded-md bg-gray-200">

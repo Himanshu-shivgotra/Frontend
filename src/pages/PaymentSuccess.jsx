@@ -17,13 +17,13 @@ const PaymentSuccess = () => {
     return (
 
         <Box>
-            <Navbar />
+            <Navbar buttonTwoPath={"/store"} buttonTwoValue={"Check More Items"} />
             <VStack h="100vh" justifyContent={"center"}>
+                <div>
+                    <img src="https://img.icons8.com/?size=100&id=19Qs7U6PcAie&format=png&color=000000" alt="success img" />
+                </div>
                 <Heading textTransform={"uppercase"}>Order Successfull
                 </Heading>
-                <Link to="/store">
-                    <Button>Home</Button>
-                </Link>
                 <Text>
                     Reference Number: {referenceNum}
                 </Text>

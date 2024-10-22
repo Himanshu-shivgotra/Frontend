@@ -1,8 +1,8 @@
-import { Box, Center, Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Box, Center, Stack, useBreakpointValue } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Card from '../common-components/Card'
-import Navbar from "../common-components/Navbar.jsx"
+import Card from '../common-components/Card';
+import Navbar from "../common-components/Navbar.jsx";
 
 const ItemStore = () => {
     const [products, setProducts] = useState([]);
@@ -12,6 +12,8 @@ const ItemStore = () => {
             try {
                 const { data } = await axios.get("https://fakestoreapi.com/products");
                 setProducts(data);  // Store the products from the API
+                console.log(data)
+
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
@@ -45,19 +47,27 @@ const ItemStore = () => {
             theme: {
                 color: "#3399cc"
             },
-            method: {
-                upi: true
-            }
         };
         const razor = new window.Razorpay(options);
         razor.open();
     };
 
+    // Responsive margin and direction
+    const stackDirection = useBreakpointValue({ base: "row", md: "row" });
+    const stackSpacing = useBreakpointValue({ base: 4, md: 8 });
+
     return (
         <>
-            <Navbar />
-            <Box mt={"10"}>
-                <Stack h={"100vh"} justifyContent="center" direction={["column", "row"]} wrap="wrap">
+            <Navbar buttonTwoPath={"/track-order"} buttonTwoValue={"Track Your Order"} />
+            <Box mt={10} pt={8}>
+                <Stack
+                    h={"100vh"}
+                    justifyContent="center"
+                    direction={stackDirection}
+                    spacing={stackSpacing}
+                    wrap="wrap"
+                    p={4} // Add padding for mobile
+                >
                     {products.length > 0 ? (
                         products.map(product => (
                             <Card
@@ -75,6 +85,6 @@ const ItemStore = () => {
             </Box>
         </>
     );
-}
+};
 
 export default ItemStore;

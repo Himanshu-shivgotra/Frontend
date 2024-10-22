@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../common-components/Navbar";
 
 const orderStatuses = [
     "Order Placed",
@@ -84,16 +85,18 @@ const OrderTracking = () => {
             setOrderDetails(null);
         }
     };
+    console.log(orderDetails)
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Track Your Order</h1>
+        <div className="p-4 md:p-10 lg:p-14 sm:w-full md:w-1/2 lg:w-1/3 mt-16 md:mt-20 mx-auto">
+            <Navbar buttonTwoPath={"/store"} buttonTwoValue={"Check More Items"} />
+            <h1 className="text-xl md:text-2xl font-bold mb-4 text-center">Track Your Order</h1>
 
             {/* Dropdown for selecting orders */}
             <select
                 value={selectedOrderId}
                 onChange={handleOrderSelect}
-                className="border p-2 rounded mb-4"
+                className="border p-2 rounded mb-4 w-full"
             >
                 <option value="">Select an order</option>
                 {/* Filter out delivered orders */}
@@ -115,42 +118,45 @@ const OrderTracking = () => {
                 placeholder="Or enter Order ID"
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
-                className="border p-2 rounded mr-2"
+                className="border p-2 rounded mb-4 w-full"
             />
             <button
                 onClick={trackOrder}
-                className="bg-blue-500 text-white p-2 rounded"
+                className="bg-blue-500 text-white p-2 rounded w-full md:w-auto"
             >
                 Track Order
             </button>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             {orderDetails && (
-                <div className="mt-6">
-                    <h2 className="text-xl font-semibold">
+                <div className="mt-4 md:mt-6 w-full">
+                    <h2 className="text-lg md:text-xl font-semibold text-center">
                         Order Status: {orderDetails.status}
                     </h2>
 
                     {/* Stepper */}
-                    <ol className="flex items-center w-full text-xs text-gray-900 font-medium sm:text-base mt-4">
+                    <ol className="flex items-center w-full text-xs text-gray-900 font-medium sm:text-base mt-4 flex-col md:flex-row">
                         {orderStatuses.map((status, index) => (
                             <li
                                 key={index}
-                                className={`flex w-full relative ${index < orderStatuses.length - 1
-                                        ? 'after:content-[""] after:w-full after:h-0.5 after:bg-gray-200 after:inline-block after:absolute lg:after:top-5 after:top-3 after:left-4'
-                                        : ""
+                                className={`flex w-full relative justify-center mt-8 ${index < orderStatuses.length - 1
+                                    ? 'after:content-[""] after:w-full after:h-0.5 after:bg-gray-200 after:inline-block after:absolute lg:after:top-5 after:top-3 after:left-4'
+                                    : ""
                                     }`}
                             >
                                 <div className="block whitespace-nowrap z-10">
                                     <span
                                         className={`w-6 h-6 ${index <= orderStatuses.indexOf(orderDetails.status)
-                                                ? "bg-indigo-600 border-2 border-transparent text-white"
-                                                : "bg-gray-50 border-2 border-gray-200 text-gray-900"
-                                            } rounded-full flex justify-center items-center mx-auto mb-3 text-sm lg:w-10 lg:h-10`}
+                                            ? "bg-indigo-600 border-2 border-transparent text-white"
+                                            : "bg-gray-50 border-2 border-gray-200 text-gray-900"
+                                            } 
+                                            
+                                            rounded-full flex justify-center items-center mx-auto mb-3 text-sm lg:w-10 lg:h-10`}
                                     >
                                         {index + 1}
                                     </span>
                                     <span
-                                        className={`block text-sm ${index <= orderStatuses.indexOf(orderDetails.status)
+                                        className={`block text-sm px-2
+${index <= orderStatuses.indexOf(orderDetails.status)
                                                 ? "text-indigo-600"
                                                 : "text-gray-500"
                                             }`}
@@ -166,7 +172,7 @@ const OrderTracking = () => {
                     {orderDetails.status !== "Delivered" && (
                         <button
                             onClick={handleNextStatus}
-                            className="mt-4 bg-green-500 text-white p-2 rounded"
+                            className="mt-4 bg-green-500 text-white p-2 rounded w-full md:w-auto"
                         >
                             Next Status
                         </button>
@@ -174,6 +180,7 @@ const OrderTracking = () => {
                 </div>
             )}
         </div>
+
     );
 };
 
